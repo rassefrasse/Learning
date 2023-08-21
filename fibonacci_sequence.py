@@ -9,4 +9,4 @@ for i in range(1, sequence):
     sequence1 = sequence2
     sequence2 = i
     print(i)
-        
+
