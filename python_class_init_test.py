@@ -5,8 +5,9 @@ class Intern:
     def __init__(self, firstname, lastname, pay):
         self.firstname = firstname
         self.lastname = lastname
-        self.mail = firstname + '.' + lastname + "@company.com"
         self.pay = pay
+        self.mail = firstname + '.' + lastname + "@company.com"
+
 
         Intern.num_of_interns += 1
 
@@ -19,19 +20,49 @@ class Intern:
     @classmethod
     def change_pay(cls, amount):
         return cls.pay_increase == amount
+    
+
+class Marketing_Intern(Intern):
+    pay_increase = 1.15
+    def __init__(self, firstname, lastname, pay, speciality):
+        super().__init__(firstname, lastname, pay)
+        self.speciality = speciality
+
+class Manager(Intern):
+    def __init__(self, firstname, lastname, pay, manage=None):
+        super().__init__(firstname, lastname, pay)
+        if manage == None:
+            self.manage = []
+        else: 
+            self.manage = manage
+
+    def add_intern(self, intern):
+        if intern not in self.manage:
+            self.manage.append(intern)
+
+    def remove_intern(self, intern):
+        if intern in self.manage:
+            self.manage.remove(intern)
+
+    def show_interns(self):
+        for intern in self.manage:
+            print("-->", intern.fullname())
+
+
+
 
 print(Intern.num_of_interns)
+
 intern1 = Intern('Rasmus', 'Ekblom', 30000)
-intern2 = Intern('Poon', 'Chan', 35000)
+intern2 = Marketing_Intern('Poon', 'Chan', 35000, "Advertisement")
 
-Intern.pay_increase = 1.06
+employee = Manager("Lotta", "På_Bråckmackagatan", 80000, [intern2])
 
-print(intern1.mail, intern2.mail)
-print(Intern.pay_increase)
-print(intern2.pay_increase)
-print(intern2.fullname())
-print(intern2.pay_raise())
-print(Intern.num_of_interns)
+employee.show_interns()
+
+print(intern2.mail)
+print(intern2.speciality)
+
 
 
 
