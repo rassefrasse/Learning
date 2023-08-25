@@ -42,4 +42,4 @@ class Game:
 
 cards = Deck()
 cards.build() #Run the creation of the cards>>
-cards.show() #Just displaying the cards
+cards.show() #Just displaying the cardss
